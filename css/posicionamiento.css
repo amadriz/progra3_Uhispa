@@ -1,0 +1,34 @@
+div.uno{
+     background-color: #abcff7; 
+     height: 50px;
+     width: 100px;
+     position: static;
+}
+div.dos{
+     background-color: #AAFF98; 
+     height: 50px;
+     width: 100px;
+     position: absolute;
+     top: 100px;
+     left: 100px;    
+}
+div.tres{
+     background-color: #CCAABB; 
+     height: 50px;
+     width: 100px;
+     position: static;
+}
+div.cuatro{
+     background-color: #ffddaa; 
+     height: 50px;
+     width: 100px;
+     position: relative;
+     top: 200px;
+     left: 200px;  
+}
+div.cinco{
+     background-color: #99aa11; 
+     height: 50px;
+     width: 100px;
+     position: static;
+}
