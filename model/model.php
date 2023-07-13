@@ -1,20 +1,20 @@
 <?php
-
+//Importo archivo de conexion
 require_once 'conn/conexion.php';
 
 class model{
-    private $db;
+    private $dbconn;
     
     public function __construct() {
-        $this->db = new conn();
+        $this->dbconn = new conn();
     }
  
     public function m_validarLogin($usu,$pass) {
-        $this->db->conectar();
+        $this->dbconn->conectar();
         
         $sql = "select * from login where correo='".$usu."' and pass='".$pass."'";	
         //md5('UH_2023_p3_$pass')
-        $rs = $this->db->ejecutarSql($sql);
+        $rs = $this->dbconn->ejecutarSql($sql);
         
         $arrUsuario = array();
         
@@ -28,23 +28,31 @@ class model{
           $arrUsuario['perfil'] =   $fila['perfil'];
 
         }
-        $this->db->desconectar();
+        $this->dbconn->desconectar();
         return $arrUsuario;
         
     }
 
-    public function m_registrarUsuario($nombre, $primerApellido, $segundoApellido, $cedula, $correo, $pass) {
+    public function m_registrarUsuario($datos) {
         
-        $this->db->conectar();
+        $this->dbconn->conectar();
 
         try {
-            $sql = "insert into login (nombre,ap1,ap2,cedula,correo,pass,perfil) values ('".$nombre."','".$primerApellido."','".$segundoApellido."','".$cedula."','".$correo."','".$pass."','2')";
-            $rs = $this->db->ejecutarSql($sql);
-            $this->db->desconectar();
+            $sql = "insert into login (nombre,ap1,ap2,cedula,correo,pass,perfil) values ('".$datos['nombre']."','".$datos['primerApellido']."','".$datos['segundoApellido']."','".$datos['cedula']."','".$datos['email']."','".$datos['pass']."','3')";
+            $rs = $this->dbconn->ejecutarSql($sql);
+
+            //Para porbar que datos lleva el objeto a la db.
+            // echo $sql;
+            // exit();
+
+            $this->dbconn->desconectar();
             return $rs;
+            
         } catch (\Throwable $th) {
             throw $th;
         }
+
+        
         
     }
     

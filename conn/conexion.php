@@ -26,7 +26,7 @@ class conn {
     public function conectar() {
 
         try {
-            $this->link = new mysqli($this->server, $this->usu, $this->pass, $this->db);
+            $this->link = mysqli_connect($this->server, $this->usu, $this->pass, $this->db);
 
             if ($this->link->connect_error) {
                 die("Error failed to connect to MySQL: " . $this->link->connect_error);
@@ -40,14 +40,18 @@ class conn {
     }
 
     public function desconectar() {
-        mysqli_close($this->link);
+        if ($this->link != null) {
+            mysqli_close($this->link);
+        }
+        
     }
-
+    //Queries para esta conexion con la base de datos, retorna respuesta de la base de datos
     public function ejecutarSql($sql) {
         $rs = $this->link->query($sql);
         return $rs;
     }
-
+    //Ejecuta un commit en la base de datos
+    //Inserta, actualiza o elimina datos en la base de datos
     public function ejecutarCommit() {
         mysqli_commit($this->link);
     }

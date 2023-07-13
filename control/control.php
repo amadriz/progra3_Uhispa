@@ -33,7 +33,8 @@ class control {
                     $this->validarLogin();                
                     break;
                 case 'registro':
-                    $this->mostrarFRMRegistro();
+                    $this->Registrar();
+                    
                     break;
             }
         } else {
@@ -51,7 +52,7 @@ class control {
         
     }
 
-    public function mostrarFRMRegistro() {
+    public function Registrar() {
 
         $nombre             = $_REQUEST['nombre'];
         $primerApellido     = $_REQUEST['primerApellido'];
@@ -62,19 +63,40 @@ class control {
 
 
         //Acutalizar objento por medio de la funcion con parameteros m_registrarUsuario
-        $rs = $this->objModel->m_registrarUsuario($nombre, $primerApellido, $segundoApellido, $cedula, $correo, $pass);
-        //print $rs information in json format
+        //$rs = $this->objModel->m_registrarUsuario($nombre, $primerApellido, $segundoApellido, $cedula, $correo, $pass);
         
+        //Create array arrdatos
+        $arrdatos = array();
 
-       
+        //Asignar valores al array arrdatos
+        //Asociado a un indice
+        $arrdatos['nombre'] = $nombre;
+        $arrdatos['primerApellido'] = $primerApellido;
+        $arrdatos['segundoApellido'] = $segundoApellido;
+        $arrdatos['cedula'] = $cedula;
+        $arrdatos['correo'] = $correo;
+        $arrdatos['pass'] = $pass;
+
+        //Enviar los datos del array al modelo
+        $rs = $this->objModel->m_registrarUsuario($arrdatos);
+
+        if($rs){
+           
         //Mostrar el formulario de registro
         $this->objsmarty->setAssign("titulo", "Registro de Usuario");
-        $this->objsmarty->setAssign("msg", "");
+        $this->objsmarty->setAssign("msg", $msg);
         $this->objsmarty->setDisplay("header.tpl");
         $this->objsmarty->setDisplay("registro.tpl");
         $this->objsmarty->setDisplay("footer.tpl");
-       
-
+        }else{
+            $this->objsmarty->setAssign("msg", "Error al registrar el usuario");
+            $this->objsmarty->setDisplay("header.tpl");
+            $this->objsmarty->setDisplay("registro.tpl");
+            $this->objsmarty->setDisplay("footer.tpl");
+        }
+        
+        
+            
                
     }
 
@@ -86,8 +108,9 @@ class control {
         
         
         if(sizeof($rs)>0){
-            
-            echo "exito! usuario y pass validos";
+            //Si ingresa usuario y pass correctos entra a la página principal
+            //objsmarty setdisplay
+            $this->objsmarty->setDisplay("principal.tpl");
         }else{
             
             $this->objsmarty->setAssign("msg", "Error! Usuario o pass Invalidos");

@@ -26,12 +26,13 @@
       </label>
     </div>
     <div class="row">
+    <div class="col-sm-6">
+        <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
+      </div>
       <div class="col-sm-6">
         <a href="index.php?accion=registro" class="btn btn-primary w-100 py-2 mb-3">Registrarse</a>
       </div>      
-      <div class="col-sm-6">
-        <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
-      </div>
+      
     </div>
   </form>
 </main>

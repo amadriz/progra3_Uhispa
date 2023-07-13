@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2023-07-11 01:05:04
+/* Smarty version 4.3.1, created on 2023-07-13 01:01:14
   from 'C:\wamp64\www\semana8_Login_Registro\view\templates\login.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_64acaac0a43e21_77653819',
+  'unifunc' => 'content_64af4cda7c18d6_68612591',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8e14e1aedc9e9413a8b94ac747e62d6db9a0a0bf' => 
     array (
       0 => 'C:\\wamp64\\www\\semana8_Login_Registro\\view\\templates\\login.tpl',
-      1 => 1689037213,
+      1 => 1689210071,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_64acaac0a43e21_77653819 (Smarty_Internal_Template $_smarty_tpl) {
+function content_64af4cda7c18d6_68612591 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container mt-5" >
     
@@ -50,12 +50,13 @@ function content_64acaac0a43e21_77653819 (Smarty_Internal_Template $_smarty_tpl)
       </label>
     </div>
     <div class="row">
+    <div class="col-sm-6">
+        <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
+      </div>
       <div class="col-sm-6">
         <a href="index.php?accion=registro" class="btn btn-primary w-100 py-2 mb-3">Registrarse</a>
       </div>      
-      <div class="col-sm-6">
-        <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
-      </div>
+      
     </div>
   </form>
 </main>
