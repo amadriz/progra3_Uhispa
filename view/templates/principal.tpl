@@ -44,6 +44,8 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script src="js/utils.js"></script>
+
 </head>
 
 <body>
