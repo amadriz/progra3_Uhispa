@@ -1,4 +1,7 @@
 <?php
+//Manejo de sesiones 
+//Activar secsiones   
+session_start();
 
 require_once 'libs/smarty_4_3_1/configuracion.php';
 require_once 'model/model.php';
@@ -21,6 +24,22 @@ class control {
         $this->objModel = $objModel;
     }
 
+    public function ValidarSession(){
+        if(!isset($_SESSION['id_usuario'])){
+            
+            
+        
+    }else{
+        $valor = "Uhispano";
+        $this->objsmarty->setAssign("titulo", $valor);
+        $this->objsmarty->setAssign("msg", "");
+        $this->objsmarty->setDisplay("header.tpl");
+        $this->objsmarty->setDisplay("login.tpl");
+        $this->objsmarty->setDisplay("footer.tpl");
+    }
+
+    }
+
     public function gestion_procesos() {
        
 
@@ -36,8 +55,17 @@ class control {
                     $this->Registrar();
                     
                     break;
+                case 'logout':
+                    $this->Logout();
+                    break;
             }
         } else {
+
+            //Para mantener session iniciada
+            if(isset($_SESSION['id_usuario'])){
+                $this->objsmarty->setDisplay("principal.tpl");
+            
+        }else{
             $valor = "Uhispano";
             $this->objsmarty->setAssign("titulo", $valor);
             $this->objsmarty->setAssign("msg", "");
@@ -47,6 +75,11 @@ class control {
         }
     }
     
+    }
+
+    public function Logout() {
+        header("location: control/logoff.php");
+    }
 
     public function validar_inactividad() {
         
@@ -105,12 +138,20 @@ class control {
         $pass = $_REQUEST['pass'];
         
         $rs =  $this->objModel->m_validarLogin($mail,$pass);
-        
+
         
         if(sizeof($rs)>0){
+
+            $_SESSION['id_usuario']      = $rs['id_usuario'];
+            $_SESSION['nombre']          = $rs['nombre'];
+            $_SESSION['primerApellido']  = $rs['primerApellido'];
+            $_SESSION['segundoApellido'] = $rs['segundoApellido'];
+            $_SESSION['cedula']          = $rs['cedula'];
+            $_SESSION['correo']          = $rs['correo'];
+            $_SESSION['perfil']            = $rs['perfil'];
             //Si ingresa usuario y pass correctos entra a la página principal
             //objsmarty setdisplay
-            $this->objsmarty->setDisplay("principal.tpl");
+            //$this->objsmarty->setDisplay("principal.tpl");
         }else{
             
             $this->objsmarty->setAssign("msg", "Error! Usuario o pass Invalidos");

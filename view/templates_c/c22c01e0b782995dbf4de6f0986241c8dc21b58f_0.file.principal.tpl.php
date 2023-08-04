@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2023-07-13 02:17:09
+/* Smarty version 4.3.1, created on 2023-07-27 01:26:14
   from 'C:\wamp64\www\semana8_Login_Registro\view\templates\principal.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_64af5ea53ba949_02235334',
+  'unifunc' => 'content_64c1c7b6dfead2_52871223',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c22c01e0b782995dbf4de6f0986241c8dc21b58f' => 
     array (
       0 => 'C:\\wamp64\\www\\semana8_Login_Registro\\view\\templates\\principal.tpl',
-      1 => 1689214624,
+      1 => 1690420937,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_64af5ea53ba949_02235334 (Smarty_Internal_Template $_smarty_tpl) {
+function content_64c1c7b6dfead2_52871223 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -67,6 +67,10 @@ function content_64af5ea53ba949_02235334 (Smarty_Internal_Template $_smarty_tpl)
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <?php echo '<script'; ?>
+ src="js/utils.js"><?php echo '</script'; ?>
+>
+
 </head>
 
 <body>
@@ -144,7 +148,7 @@ function content_64af5ea53ba949_02235334 (Smarty_Internal_Template $_smarty_tpl)
         <i class="bi bi-list mobile-nav-toggle d-none"></i>
       </nav><!-- .navbar -->
 
-      <a class="btn-getstarted scrollto" href="index.html#about">Get Started</a>
+      <a class="btn-getstarted scrollto" href="index.php?accion=logout">Logout</a>
 
     </div>
   </header><!-- End Header -->

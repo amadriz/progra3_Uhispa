@@ -123,7 +123,7 @@
         <i class="bi bi-list mobile-nav-toggle d-none"></i>
       </nav><!-- .navbar -->
 
-      <a class="btn-getstarted scrollto" href="index.html#about">Get Started</a>
+      <a class="btn-getstarted scrollto" href="index.php?accion=logout">Logout</a>
 
     </div>
   </header><!-- End Header -->

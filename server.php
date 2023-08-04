@@ -1,61 +1,70 @@
 <?php
 
-//require conexion
 require_once './conn/conexion.php';
 
-//DE esta forma caputarmos la manera en que viene el cliente get, post, put, delete
 $tipo = $_SERVER['REQUEST_METHOD'];
 
-//validar el tipo de peticion
 switch ($tipo) {
     case 'GET':
-        ListarUsuarios();
+        getListaUsuarios();
         break;
-    case 'POST':
-        echo "Peticion POST";
+    case 'DELETE':
+        delUsuario();
         break;
     default:
-        echo "Peticion no valida";
+        header("HTTP/1.1 405 method not allowed");
+        header("allow GET");
         break;
 }
+function  delUsuario(){
+    $idUsuario=$_REQUEST['idUsuario'];
+    $db = new conn();
+    $db->conectar();
+    $sql = "delete FROM login where id_usuario=".$idUsuario;
+    $rs = $db->ejecutarSql($sql);
+    $db->ejecutarCommit();
+    $db->desconectar();
+    
+    echo "ok";
+    exit;
+    
+    
+}
+function getListaUsuarios() {
 
-function ListarUsuarios()
-{
-    $db = new Conexion();
+    $db = new conn();
     $db->conectar();
 
-    $sql = "SELECT * FROM login";
+    $sql = "SELECT id_usuario,nombre,ap1,ap2,cedula,correo,pass,perfil FROM login";
 
-    $resultado = $db->ejecutarSql($sql);
+    $rs = $db->ejecutarSql($sql);
 
-    $tabla = "<table>";
+    $tabla = "<table class='table'>";
     $tabla .= "<tr>";
-    $tabla .= "<th>Id</th>";
-    $tabla .= "<th>Nombre</th>";
-    $tabla .= "<th>Apellido</th>";\
-    $tabla .= "<th>Apellido 2</th>";\
-    $tabla .= "<th>Correo</th>";
-    $tabla .= "<th>perfil</th>";
-    $tabla = "</tr>";
-
-    while($fila = mysqli_fetch_assoc($rs)){
-
-        $tabla .= "<tr>";
-
-        $tabla  .=   $fila['id_usuario'];
-        $tabla  .=   $fila['nombre'];
-        $tabla  .=   $fila['ap1'];
-        $tabla  .=   $fila['ap2'];
-        $tabla  .=   $fila['cedula'];
-        $tabla  .=   $fila['correo'];
-        $tabla  .=   $fila['perfil'];
-
-        $tabla .= "</tr>";
-
-      }
+    $tabla .= "<th>id_usuario</th>";
+    $tabla .= "<th>nombre</th>";
+    $tabla .= "<th>ap1</th>";
+    $tabla .= "<th>ap2</th>";
+    $tabla .= "<th>cedula</th>";
+    $tabla .= "<th>correo</th>";
+    $tabla .= "<th>perfil</th>";   
+    $tabla .= "<th>acciones</th>";     
+    $tabla .= "</tr>";
     
-    $tabla .= "</table>";
+     while($fila = mysqli_fetch_assoc($rs)){
+         $tabla .= "<tr>";
+                $tabla .= "<td>".$fila['id_usuario']."</td>";
+                $tabla .= "<td>".$fila['nombre']."</td>";
+                $tabla .= "<td>".$fila['ap1']."</td>";
+                $tabla .= "<td>".$fila['ap2']."</td>";
+                $tabla .= "<td>".$fila['cedula']."</td>";
+                $tabla .= "<td>".$fila['correo']."</td>";
+                $tabla .= "<td>".$fila['perfil']."</td>";    
+                $tabla .= "<td><a href='#' onclick='js_delUsuario(".$fila['id_usuario'].");'><img src='img/borrar.png' ></a></td>";   
+          $tabla .= "</tr>";
 
+        }
+        $tabla .= "</table>";
+    
     echo $tabla;
-    
-    }
+}
