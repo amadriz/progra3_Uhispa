@@ -38,11 +38,11 @@ class model{
         $this->dbconn->conectar();
 
         try {
-            $sql = "insert into login (nombre,ap1,ap2,cedula,correo,pass,perfil) values ('".$datos['nombre']."','".$datos['primerApellido']."','".$datos['segundoApellido']."','".$datos['cedula']."','".$datos['email']."','".$datos['pass']."','3')";
+            $sql = "insert into login (nombre,ap1,ap2,cedula,correo,pass,perfil) values ('".$datos['nombre']."','".$datos['primerApellido']."','".$datos['segundoApellido']."','".$datos['cedula']."','".$datos['correo']."','".$datos['pass']."','3')";
             $rs = $this->dbconn->ejecutarSql($sql);
 
             //Para porbar que datos lleva el objeto a la db.
-            // echo $sql;
+             //echo $sql;
             // exit();
 
             $this->dbconn->desconectar();
